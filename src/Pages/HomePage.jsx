@@ -260,13 +260,13 @@ function HomePage() {
           {/* Category Filter */}
           <div>
             <h5 className="font-medium text-gray-700 mb-3">Category</h5>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
+            <div className="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
               {categories?.map((c) => (
                 <Checkbox
                   key={c._id}
                   onChange={(e) => handleFilter(e.target.checked, c._id)}
                   checked={checked.includes(c._id)}
-                  className="block text-gray-600 hover:text-blue-600"
+                  className="block text-gray-600 hover:text-blue-600 transition-colors duration-200"
                 >
                   <span className="ml-2">{c.name}</span>
                 </Checkbox>
@@ -286,7 +286,7 @@ function HomePage() {
                 <Radio
                   key={p._id}
                   value={p.array}
-                  className="block text-gray-600 hover:text-blue-600"
+                  className="block text-gray-600 hover:text-blue-600 transition-colors duration-200"
                 >
                   <span className="ml-2">{p.name}</span>
                 </Radio>
@@ -298,7 +298,7 @@ function HomePage() {
         <Button
           type="default"
           icon={<ReloadOutlined />}
-          className="w-full mt-6 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400"
+          className="w-full mt-6 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400 transition-all duration-200"
           onClick={resetFilters}
         >
           Reset All Filters
@@ -349,86 +349,25 @@ function HomePage() {
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Filters Sidebar */}
-            <div className="lg:w-64 flex-shrink-0">
+            {/* Mobile Filter Button */}
+            <div className="lg:hidden mb-4">
+              <Button
+                type="primary"
+                icon={<FilterOutlined />}
+                onClick={() => setFilterDrawerVisible(true)}
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              >
+                <span>Filters</span>
+                {(checked.length > 0 || radio.length > 0) && (
+                  <Badge count={checked.length + radio.length} size="small" />
+                )}
+              </Button>
+            </div>
+
+            {/* Filters Sidebar - Desktop */}
+            <div className="hidden lg:block lg:w-64 flex-shrink-0">
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sticky top-4">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Filters
-                  </h3>
-                  <Button
-                    type="text"
-                    icon={<FilterOutlined />}
-                    onClick={() => setFilterDrawerVisible(true)}
-                    className="lg:hidden"
-                  />
-                </div>
-
-                {/* Category Filter */}
-                <div className="mb-6">
-                  <h4 className="font-medium text-gray-900 mb-3">Categories</h4>
-                  <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-                    {categories.map((c) => (
-                      <div key={c._id} className="flex items-center">
-                        <Checkbox
-                          onChange={(e) =>
-                            handleFilter(e.target.checked, c._id)
-                          }
-                          checked={checked.includes(c._id)}
-                        >
-                          <span className="text-gray-600">{c.name}</span>
-                        </Checkbox>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Price Filter */}
-                <div className="mb-6">
-                  <h4 className="font-medium text-gray-900 mb-3">
-                    Price Range
-                  </h4>
-                  <Radio.Group
-                    onChange={(e) => setRadio(e.target.value)}
-                    value={radio}
-                  >
-                    <div className="space-y-2">
-                      {Age.map((p) => (
-                        <div key={p._id} className="flex items-center">
-                          <Radio value={p.array}>
-                            <span className="text-gray-600">{p.name}</span>
-                          </Radio>
-                        </div>
-                      ))}
-                    </div>
-                  </Radio.Group>
-                </div>
-
-                {/* Sort Options */}
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-3">Sort By</h4>
-                  <Select
-                    className="w-full"
-                    value={sortBy}
-                    onChange={setSortBy}
-                    suffixIcon={<SortAscendingOutlined />}
-                  >
-                    <Option value="newest">Newest First</Option>
-                    <Option value="price-low">Price: Low to High</Option>
-                    <Option value="price-high">Price: High to Low</Option>
-                    <Option value="name">Name: A to Z</Option>
-                  </Select>
-                </div>
-
-                {/* Reset Filters Button */}
-                <Button
-                  type="default"
-                  icon={<ReloadOutlined />}
-                  className="w-full mt-6 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400"
-                  onClick={resetFilters}
-                >
-                  Reset All Filters
-                </Button>
+                <FilterContent />
               </div>
             </div>
 
@@ -784,73 +723,133 @@ function HomePage() {
 
         {/* Mobile Filter Drawer */}
         <Drawer
-          title="Filters"
+          title={
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-2">
+                <svg
+                  className="w-5 h-5 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                  />
+                </svg>
+                <div>
+                  <span className="text-lg font-semibold text-gray-900">
+                    Filters
+                  </span>
+                  {(checked.length > 0 || radio.length > 0) && (
+                    <div className="text-xs text-gray-500 -mt-1">
+                      {checked.length + radio.length} filter
+                      {checked.length + radio.length !== 1 ? "s" : ""} applied
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {(checked.length > 0 || radio.length > 0) && (
+                <Button
+                  type="text"
+                  size="small"
+                  icon={<ReloadOutlined />}
+                  onClick={resetFilters}
+                  className="text-red-500 hover:text-red-600 hover:bg-red-50 px-2 py-1 text-xs"
+                >
+                  Reset All
+                </Button>
+              )}
+            </div>
+          }
           placement="right"
           onClose={() => setFilterDrawerVisible(false)}
-          visible={filterDrawerVisible}
-          width={300}
+          open={filterDrawerVisible}
+          width="100%"
+          height="100%"
+          className="filter-drawer md:!w-96"
+          styles={{
+            body: {
+              padding: 0,
+              background: "#ffffff",
+              height: "calc(100vh - 140px)",
+              overflowY: "auto",
+            },
+            header: {
+              padding: "16px",
+              borderBottom: "1px solid #e5e7eb",
+              background: "#ffffff",
+              position: "sticky",
+              top: 0,
+              zIndex: 10,
+            },
+            mask: {
+              backdropFilter: "blur(4px)",
+              background: "rgba(0, 0, 0, 0.3)",
+            },
+            wrapper: {
+              boxShadow: "none",
+            },
+            content: {
+              borderRadius: 0,
+              height: "100vh",
+            },
+          }}
+          closeIcon={
+            <div className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
+              <svg
+                className="w-5 h-5 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+          }
         >
-          {/* Category Filter */}
-          <div className="mb-6">
-            <h4 className="font-medium text-gray-900 mb-3">Categories</h4>
-            <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-              {categories.map((c) => (
-                <div key={c._id} className="flex items-center">
-                  <Checkbox
-                    onChange={(e) => handleFilter(e.target.checked, c._id)}
-                    checked={checked.includes(c._id)}
-                  >
-                    <span className="text-gray-600">{c.name}</span>
-                  </Checkbox>
-                </div>
-              ))}
+          <div className="px-4 py-6 pb-20">
+            <FilterContent />
+          </div>
+
+          {/* Mobile-optimized footer */}
+          <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-20">
+            <div className="flex items-center justify-between gap-3">
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">
+                  {checked.length + radio.length}
+                </span>{" "}
+                filters active
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  type="text"
+                  onClick={() => setFilterDrawerVisible(false)}
+                  className="text-gray-600 hover:text-gray-800 px-4 py-2"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    // Apply filters logic here
+                    setFilterDrawerVisible(false);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 border-blue-600 px-6 py-2"
+                >
+                  Apply Filters
+                </Button>
+              </div>
             </div>
           </div>
-
-          {/* Price Filter */}
-          <div className="mb-6">
-            <h4 className="font-medium text-gray-900 mb-3">Price Range</h4>
-            <Radio.Group
-              onChange={(e) => setRadio(e.target.value)}
-              value={radio}
-            >
-              <div className="space-y-2">
-                {Age.map((p) => (
-                  <div key={p._id} className="flex items-center">
-                    <Radio value={p.array}>
-                      <span className="text-gray-600">{p.name}</span>
-                    </Radio>
-                  </div>
-                ))}
-              </div>
-            </Radio.Group>
-          </div>
-
-          {/* Sort Options */}
-          <div>
-            <h4 className="font-medium text-gray-900 mb-3">Sort By</h4>
-            <Select
-              className="w-full"
-              value={sortBy}
-              onChange={setSortBy}
-              suffixIcon={<SortAscendingOutlined />}
-            >
-              <Option value="newest">Newest First</Option>
-              <Option value="price-low">Price: Low to High</Option>
-              <Option value="price-high">Price: High to Low</Option>
-              <Option value="name">Name: A to Z</Option>
-            </Select>
-          </div>
-
-          {/* Reset Filters Button */}
-          <Button
-            type="default"
-            icon={<ReloadOutlined />}
-            className="w-full mt-6 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400"
-            onClick={resetFilters}
-          >
-            Reset All Filters
-          </Button>
         </Drawer>
       </div>
     </Layout>
