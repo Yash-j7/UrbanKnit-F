@@ -22,7 +22,7 @@ function Register() {
       //const apiUrl = process.env.VITE_API_URL; ${apiUrl}
 
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
+        "https://urnanknit-backend.onrender.com/api/v1/auth/register",
         {
           name,
           email,

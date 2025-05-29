@@ -32,7 +32,7 @@ function DetailedProduct() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`
+        `https://urnanknit-backend.onrender.com/api/v1/product/get-product/${params.slug}`
       );
 
       if (data?.product) {
@@ -50,7 +50,7 @@ function DetailedProduct() {
   const getRelatedProducts = async (pid, cid) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/related-product/${pid}/${cid}`
+        `https://urnanknit-backend.onrender.com/api/v1/product/related-product/${pid}/${cid}`
       );
 
       if (data?.products) {
@@ -112,13 +112,26 @@ function DetailedProduct() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <Breadcrumb className="text-sm">
               <Breadcrumb.Item>
-                <a href="/" className="text-gray-500 hover:text-blue-600 transition-colors">Home</a>
+                <a
+                  href="/"
+                  className="text-gray-500 hover:text-blue-600 transition-colors"
+                >
+                  Home
+                </a>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <a href="/products" className="text-gray-500 hover:text-blue-600 transition-colors">Products</a>
+                <a
+                  href="/products"
+                  className="text-gray-500 hover:text-blue-600 transition-colors"
+                >
+                  Products
+                </a>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <a href={`/category/${prod?.category?.name}`} className="text-gray-500 hover:text-blue-600 transition-colors">
+                <a
+                  href={`/category/${prod?.category?.name}`}
+                  className="text-gray-500 hover:text-blue-600 transition-colors"
+                >
                   {prod?.category?.name}
                 </a>
               </Breadcrumb.Item>
@@ -143,7 +156,7 @@ function DetailedProduct() {
                   )}
                   <img
                     alt={prod.name}
-                    src={`http://localhost:8080/api/v1/product/product-photo/${prod._id}`}
+                    src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${prod._id}`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     onLoad={() => setImageLoaded(true)}
                     onError={() => setImageLoaded(true)}
@@ -237,7 +250,8 @@ function DetailedProduct() {
                     </button>
                   </div>
                   <span className="text-sm text-gray-500">
-                    {quantity} × ₹{prod.price.toLocaleString()} = ₹{(quantity * prod.price).toLocaleString()}
+                    {quantity} × ₹{prod.price.toLocaleString()} = ₹
+                    {(quantity * prod.price).toLocaleString()}
                   </span>
                 </div>
 
@@ -305,7 +319,10 @@ function DetailedProduct() {
               <h2 className="text-2xl font-bold text-gray-900">
                 You May Also Like
               </h2>
-              <Button type="link" className="text-blue-600 font-medium hover:text-blue-800 transition-colors">
+              <Button
+                type="link"
+                className="text-blue-600 font-medium hover:text-blue-800 transition-colors"
+              >
                 View All
               </Button>
             </div>
@@ -321,7 +338,7 @@ function DetailedProduct() {
                       <div className="aspect-square overflow-hidden bg-gray-100">
                         <img
                           alt={p.name}
-                          src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                          src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -338,8 +355,10 @@ function DetailedProduct() {
                     ]}
                   >
                     <div className="p-2">
-                      <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 hover:text-blue-600 transition-colors cursor-pointer"
-                          onClick={() => navigate(`/product/${p.slug}`)}>
+                      <h3
+                        className="font-semibold text-gray-900 mb-1 line-clamp-2 hover:text-blue-600 transition-colors cursor-pointer"
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                      >
                         {p.name}
                       </h3>
                       <p className="text-sm text-gray-600 mb-2 line-clamp-2">

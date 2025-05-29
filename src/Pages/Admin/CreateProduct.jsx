@@ -24,7 +24,7 @@ function CreateProduct() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category",
+        "https://urnanknit-backend.onrender.com/api/v1/category/get-category",
         {
           headers: {
             Authorization: auth?.token,
@@ -64,7 +64,7 @@ function CreateProduct() {
       }
 
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/create-product",
+        "https://urnanknit-backend.onrender.com/api/v1/product/create-product",
         productData,
         {
           headers: {

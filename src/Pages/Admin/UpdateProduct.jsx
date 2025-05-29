@@ -25,7 +25,7 @@ function UpdateProduct() {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`,
+        `https://urnanknit-backend.onrender.com/api/v1/product/get-product/${params.slug}`,
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,
@@ -51,7 +51,7 @@ function UpdateProduct() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category",
+        "https://urnanknit-backend.onrender.com/api/v1/category/get-category",
         {
           headers: {
             Authorization: auth?.token,
@@ -91,7 +91,7 @@ function UpdateProduct() {
       }
 
       const { data } = await axios.put(
-        `http://localhost:8080/api/v1/product/update-product/${id}`,
+        `https://urnanknit-backend.onrender.com/api/v1/product/update-product/${id}`,
         productData,
         {
           headers: {
@@ -119,7 +119,7 @@ function UpdateProduct() {
       let answer = window.prompt("Are you sure, you want to delete");
       if (!answer) return;
       const { data } = await axios.delete(
-        `http://localhost:8080/api/v1/product/delete-product/${id}`,
+        `https://urnanknit-backend.onrender.com/api/v1/product/delete-product/${id}`,
         {
           headers: {
             Authorization: auth?.token,
@@ -184,7 +184,7 @@ function UpdateProduct() {
                 ) : (
                   <div className="text-center">
                     <img
-                      src={`http://localhost:8080/api/v1/product/product-photo/${id}`}
+                      src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${id}`}
                       alt="product_photo"
                       height={"200px"}
                       className="img h-[200px]"

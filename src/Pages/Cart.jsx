@@ -42,7 +42,7 @@ function Cart() {
   const getToken = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/product/braintree/token",
+        "https://urnanknit-backend.onrender.com/api/v1/product/braintree/token",
         {
           headers: {
             Authorization: auth?.token,
@@ -77,7 +77,7 @@ function Cart() {
 
       // Create order on backend
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/payment/orders",
+        "https://urnanknit-backend.onrender.com/api/v1/product/payment/orders",
         { amount: finalTotal },
         {
           headers: {
@@ -101,7 +101,7 @@ function Cart() {
         handler: async function (response) {
           try {
             const { data: verifyData } = await axios.post(
-              "http://localhost:8080/api/v1/product/payment/verify",
+              "https://urnanknit-backend.onrender.com/api/v1/product/payment/verify",
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -126,7 +126,9 @@ function Cart() {
             }
           } catch (error) {
             console.error("Payment verification error:", error);
-            toast.error(error.response?.data?.message || "Error in payment verification");
+            toast.error(
+              error.response?.data?.message || "Error in payment verification"
+            );
             // Don't clear cart on error
           }
         },
@@ -157,7 +159,7 @@ function Cart() {
   //     setLoading(true);
   //     const { nonce } = await instance.requestPaymentMethod();
   //     const { data } = await axios.post(
-  //       "http://localhost:8080/api/v1/product/braintree/payment",
+  //       "https://urnanknit-backend.onrender.com/api/v1/product/braintree/payment",
   //       {
   //         nonce,
   //         cart,
@@ -179,7 +181,10 @@ function Cart() {
   //   }
   // };
 
-  const totalPrice = cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.price * (item.quantity || 1),
+    0
+  );
   const deliveryFee = totalPrice > 1000 ? 0 : 50;
   const finalTotal = totalPrice + deliveryFee;
 
@@ -260,7 +265,7 @@ function Cart() {
                           <img
                             alt={product.name}
                             className="w-24 h-24 object-cover rounded-lg border border-gray-200 group-hover:scale-105 transition-transform duration-300"
-                            src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+                            src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${product._id}`}
                           />
                         </div>
 

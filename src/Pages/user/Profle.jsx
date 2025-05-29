@@ -30,7 +30,7 @@ function Profile() {
 
     try {
       const { data } = await axios.put(
-        "http://localhost:8080/api/v1/auth/profile",
+        "https://urnanknit-backend.onrender.com/api/v1/auth/profile",
         {
           name,
           email,

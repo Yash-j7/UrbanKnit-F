@@ -17,7 +17,7 @@ const ForgotPasssword = () => {
     try {
       //const port = process.env.VITE_API_URL;
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/forgotPassword",
+        "https://urnanknit-backend.onrender.com/api/v1/auth/forgotPassword",
         {
           email,
           newPassword,

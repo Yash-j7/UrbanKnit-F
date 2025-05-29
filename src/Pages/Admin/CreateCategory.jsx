@@ -19,7 +19,7 @@ function CreateCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/category/create-category",
+        "https://urnanknit-backend.onrender.com/api/v1/category/create-category",
         {
           name,
         },
@@ -45,7 +45,7 @@ function CreateCategory() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category",
+        "https://urnanknit-backend.onrender.com/api/v1/category/get-category",
         {
           headers: {
             Authorization: auth?.token,
@@ -69,7 +69,7 @@ function CreateCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:8080/api/v1/category/update-category/${selected._id}`,
+        `https://urnanknit-backend.onrender.com/api/v1/category/update-category/${selected._id}`,
 
         {
           name: updatedName,
@@ -98,7 +98,7 @@ function CreateCategory() {
   const handleDelete = async (categoryId) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:8080/api/v1/category/delete-category/${categoryId}`,
+        `https://urnanknit-backend.onrender.com/api/v1/category/delete-category/${categoryId}`,
         {
           headers: {
             Authorization: auth?.token,

@@ -64,7 +64,7 @@ function HomePage() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/search/${value}`
+        `https://urnanknit-backend.onrender.com/api/v1/product/search/${value}`
       );
       setProducts(data);
       setLoading(false);
@@ -80,7 +80,7 @@ function HomePage() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/product-list/${page}`
+        `https://urnanknit-backend.onrender.com/api/v1/product/product-list/${page}`
       );
       setLoading(false);
       setInitialLoading(false);
@@ -97,7 +97,7 @@ function HomePage() {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category"
+        "https://urnanknit-backend.onrender.com/api/v1/category/get-category"
       );
       if (data?.success) setCategories(data?.category);
     } catch (error) {
@@ -109,7 +109,7 @@ function HomePage() {
   const getTotal = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/product/product-count"
+        "https://urnanknit-backend.onrender.com/api/v1/product/product-count"
       );
       setTotal(data?.total);
     } catch (error) {
@@ -122,7 +122,7 @@ function HomePage() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/product-list/${page}`
+        `https://urnanknit-backend.onrender.com/api/v1/product/product-list/${page}`
       );
       setLoading(false);
       if (data.success) setProducts([...products, ...data?.products]);
@@ -137,7 +137,7 @@ function HomePage() {
     try {
       setInitialLoading(true);
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/product-filters",
+        "https://urnanknit-backend.onrender.com/api/v1/product/product-filters",
         { checked, radio }
       );
       setProducts(data?.products);
@@ -448,20 +448,30 @@ function HomePage() {
                 </div>
               ) : (
                 <>
-                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6"
-                    style={{gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))'}}>
+                  <div
+                    className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6"
+                    style={{
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(260px, 1fr))",
+                    }}
+                  >
                     {sortedProducts.map((p) => (
                       <Card
                         key={p._id}
                         hoverable
-                        style={{ minWidth: 260, maxWidth: 340, margin: 'auto', overflow: 'hidden' }}
+                        style={{
+                          minWidth: 260,
+                          maxWidth: 340,
+                          margin: "auto",
+                          overflow: "hidden",
+                        }}
                         className="group relative border-0 shadow-sm hover:shadow-xl transition-all duration-300 bg-white rounded-lg md:rounded-xl transform hover:-translate-y-1 md:hover:-translate-y-2 overflow-hidden flex flex-col justify-between"
                         cover={
                           <div className="relative w-full aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                             {/* Main Product Image */}
                             <img
                               alt={p.name}
-                              src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                              src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                             />
 
@@ -479,7 +489,11 @@ function HomePage() {
                                 size="small"
                               />
                               <Button
-                                type={wishlist.includes(p._id) ? "primary" : "default"}
+                                type={
+                                  wishlist.includes(p._id)
+                                    ? "primary"
+                                    : "default"
+                                }
                                 shape="circle"
                                 icon={<HeartOutlined />}
                                 onClick={() => toggleWishlist(p._id)}
@@ -527,7 +541,9 @@ function HomePage() {
                                     : "bg-red-500 text-white"
                                 }`}
                               >
-                                {p.quantity > 0 ? "✓ In Stock" : "✗ Out of Stock"}
+                                {p.quantity > 0
+                                  ? "✓ In Stock"
+                                  : "✗ Out of Stock"}
                               </div>
                             </div>
 
@@ -537,7 +553,9 @@ function HomePage() {
                                 <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1.5 rounded-full shadow-md">
                                   <span className="text-sm font-bold whitespace-nowrap">
                                     {Math.round(
-                                      ((p.originalPrice - p.price) / p.originalPrice) * 100
+                                      ((p.originalPrice - p.price) /
+                                        p.originalPrice) *
+                                        100
                                     )}
                                     % OFF
                                   </span>
@@ -547,7 +565,10 @@ function HomePage() {
                           </div>
                         }
                       >
-                        <div className="p-4 md:p-5 flex flex-col justify-between min-h-[320px]" style={{paddingBottom: '1.5rem'}}>
+                        <div
+                          className="p-4 md:p-5 flex flex-col justify-between min-h-[320px]"
+                          style={{ paddingBottom: "1.5rem" }}
+                        >
                           {/* Product Title and Rating */}
                           <div className="mb-4">
                             <h3
@@ -569,7 +590,9 @@ function HomePage() {
                               <span className="text-sm text-gray-600 font-medium">
                                 (4.2)
                               </span>
-                              <span className="hidden lg:inline text-sm text-gray-400">•</span>
+                              <span className="hidden lg:inline text-sm text-gray-400">
+                                •
+                              </span>
                               <span className="hidden lg:inline text-sm text-gray-500">
                                 127 reviews
                               </span>
@@ -588,15 +611,19 @@ function HomePage() {
                                 <span className="text-xl md:text-2xl font-bold text-gray-900">
                                   ₹{p.price.toLocaleString("en-IN")}
                                 </span>
-                                {p.originalPrice && p.originalPrice > p.price && (
-                                  <span className="text-sm text-gray-500 line-through">
-                                    ₹{p.originalPrice.toLocaleString("en-IN")}
-                                  </span>
-                                )}
+                                {p.originalPrice &&
+                                  p.originalPrice > p.price && (
+                                    <span className="text-sm text-gray-500 line-through">
+                                      ₹{p.originalPrice.toLocaleString("en-IN")}
+                                    </span>
+                                  )}
                               </div>
                               {p.originalPrice && p.originalPrice > p.price && (
                                 <span className="text-sm font-semibold text-green-600">
-                                  Save ₹{(p.originalPrice - p.price).toLocaleString("en-IN")}
+                                  Save ₹
+                                  {(p.originalPrice - p.price).toLocaleString(
+                                    "en-IN"
+                                  )}
                                 </span>
                               )}
                             </div>
@@ -627,9 +654,13 @@ function HomePage() {
                                   ? "bg-gray-300 border-gray-300 cursor-not-allowed"
                                   : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 border-0 shadow-sm hover:shadow-lg transform hover:scale-[1.02]"
                               }`}
-                              icon={<ShoppingCartOutlined className="text-sm" />}
+                              icon={
+                                <ShoppingCartOutlined className="text-sm" />
+                              }
                             >
-                              {p.quantity === 0 ? "Out of Stock" : "Add to Cart"}
+                              {p.quantity === 0
+                                ? "Out of Stock"
+                                : "Add to Cart"}
                             </Button>
 
                             {/* Secondary Actions */}
@@ -643,11 +674,17 @@ function HomePage() {
                                 <span className="hidden sm:inline lg:hidden xl:inline">
                                   View Details
                                 </span>
-                                <span className="sm:hidden lg:inline xl:hidden">View</span>
+                                <span className="sm:hidden lg:inline xl:hidden">
+                                  View
+                                </span>
                               </Button>
 
                               <Button
-                                type={wishlist.includes(p._id) ? "primary" : "default"}
+                                type={
+                                  wishlist.includes(p._id)
+                                    ? "primary"
+                                    : "default"
+                                }
                                 onClick={() => toggleWishlist(p._id)}
                                 className={`h-10 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] ${
                                   wishlist.includes(p._id)
@@ -675,7 +712,9 @@ function HomePage() {
                                       clipRule="evenodd"
                                     />
                                   </svg>
-                                  <span className="hidden sm:inline">Free Shipping</span>
+                                  <span className="hidden sm:inline">
+                                    Free Shipping
+                                  </span>
                                   <span className="sm:hidden">Free Ship</span>
                                 </span>
                                 <span className="flex items-center gap-1.5 text-gray-500">
@@ -690,7 +729,9 @@ function HomePage() {
                                       clipRule="evenodd"
                                     />
                                   </svg>
-                                  <span className="hidden md:inline">Easy Returns</span>
+                                  <span className="hidden md:inline">
+                                    Easy Returns
+                                  </span>
                                   <span className="md:hidden">Returns</span>
                                 </span>
                               </div>
@@ -706,7 +747,9 @@ function HomePage() {
                           <div className="absolute inset-0 bg-white/90 backdrop-blur-sm flex items-center justify-center z-50 rounded-lg md:rounded-xl">
                             <div className="flex flex-col items-center gap-2">
                               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-                              <span className="text-xs text-gray-600">Adding...</span>
+                              <span className="text-xs text-gray-600">
+                                Adding...
+                              </span>
                             </div>
                           </div>
                         )}

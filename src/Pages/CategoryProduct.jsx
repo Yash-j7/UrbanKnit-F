@@ -18,7 +18,7 @@ function CategoryProduct() {
   const getCateProd = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/product-category/${params.slug}`
+        `https://urnanknit-backend.onrender.com/api/v1/product/product-category/${params.slug}`
       );
       setProducts(data?.products);
       setCategory(data?.category);
@@ -44,7 +44,7 @@ function CategoryProduct() {
               cover={
                 <img
                   alt={p.name}
-                  src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`}
+                  src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                 />
               }
             >

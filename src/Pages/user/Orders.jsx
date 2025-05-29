@@ -5,7 +5,11 @@ import axios from "axios";
 import { useAuth } from "../../context/auth";
 import moment from "moment";
 import { Spin, Empty, Badge, Card } from "antd";
-import { ShoppingOutlined, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {
+  ShoppingOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -16,7 +20,7 @@ function Orders() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/auth/order",
+        "https://urnanknit-backend.onrender.com/api/v1/auth/order",
         {
           headers: {
             Authorization: auth?.token,
@@ -69,7 +73,9 @@ function Orders() {
                 <h1 className="text-2xl font-bold text-gray-800">My Orders</h1>
                 <div className="flex items-center gap-2">
                   <ShoppingOutlined className="text-xl text-gray-600" />
-                  <span className="text-gray-600">Total Orders: {orders.length}</span>
+                  <span className="text-gray-600">
+                    Total Orders: {orders.length}
+                  </span>
                 </div>
               </div>
 
@@ -80,22 +86,33 @@ function Orders() {
               ) : orders.length > 0 ? (
                 <div className="space-y-6">
                   {orders.map((order, index) => (
-                    <Card key={order._id} className="hover:shadow-lg transition-shadow">
+                    <Card
+                      key={order._id}
+                      className="hover:shadow-lg transition-shadow"
+                    >
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                         <div>
                           <h3 className="text-lg font-semibold text-gray-800">
                             Order #{index + 1}
                           </h3>
                           <p className="text-sm text-gray-500">
-                            Placed on {moment(order.createdAt).format("MMMM Do YYYY, h:mm a")}
+                            Placed on{" "}
+                            {moment(order.createdAt).format(
+                              "MMMM Do YYYY, h:mm a"
+                            )}
                           </p>
                         </div>
                         <div className="flex items-center gap-4">
                           <Badge
-                            status={getStatusColor(order.status, order.paymentStatus)}
+                            status={getStatusColor(
+                              order.status,
+                              order.paymentStatus
+                            )}
                             text={
                               <span className="font-medium capitalize">
-                                {order.paymentStatus === "failed" ? "Payment Failed" : order.status}
+                                {order.paymentStatus === "failed"
+                                  ? "Payment Failed"
+                                  : order.status}
                               </span>
                             }
                           />
@@ -109,19 +126,22 @@ function Orders() {
                             className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg"
                           >
                             <img
-                              src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+                              src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${product._id}`}
                               alt={product.name}
                               className="w-20 h-20 object-cover rounded-lg"
                             />
                             <div className="flex-1">
-                              <h4 className="font-medium text-gray-800">{product.name}</h4>
+                              <h4 className="font-medium text-gray-800">
+                                {product.name}
+                              </h4>
                               <p className="text-sm text-gray-600 line-clamp-2">
                                 {product.description}
                               </p>
                               <div className="mt-2 flex items-center justify-between">
                                 <div className="space-y-1">
                                   <div className="text-sm text-gray-500">
-                                    Unit Price: ₹{product.price.toLocaleString("en-IN")}
+                                    Unit Price: ₹
+                                    {product.price.toLocaleString("en-IN")}
                                   </div>
                                   <div className="text-sm text-gray-500">
                                     Quantity: {product.quantity || 1}
@@ -129,7 +149,10 @@ function Orders() {
                                 </div>
                                 <div className="text-right">
                                   <span className="font-semibold text-gray-900">
-                                    Item Total: ₹{(product.price * (product.quantity || 1)).toLocaleString("en-IN")}
+                                    Item Total: ₹
+                                    {(
+                                      product.price * (product.quantity || 1)
+                                    ).toLocaleString("en-IN")}
                                   </span>
                                 </div>
                               </div>
@@ -147,13 +170,23 @@ function Orders() {
                               <CloseCircleOutlined className="text-red-500 text-xl" />
                             )}
                             <span className="font-medium">
-                              Payment: {order.paymentStatus === "success" ? "Successful" : "Failed"}
+                              Payment:{" "}
+                              {order.paymentStatus === "success"
+                                ? "Successful"
+                                : "Failed"}
                             </span>
                           </div>
                           <div className="text-right">
                             <p className="text-sm text-gray-500">Order Total</p>
                             <p className="text-lg font-bold text-gray-900">
-                              ₹{order.products.reduce((total, p) => total + (p.price * (p.quantity || 1)), 0).toLocaleString("en-IN")}
+                              ₹
+                              {order.products
+                                .reduce(
+                                  (total, p) =>
+                                    total + p.price * (p.quantity || 1),
+                                  0
+                                )
+                                .toLocaleString("en-IN")}
                             </p>
                           </div>
                         </div>
@@ -162,10 +195,7 @@ function Orders() {
                   ))}
                 </div>
               ) : (
-                <Empty
-                  description="No orders found"
-                  className="my-8"
-                />
+                <Empty description="No orders found" className="my-8" />
               )}
             </div>
           </div>

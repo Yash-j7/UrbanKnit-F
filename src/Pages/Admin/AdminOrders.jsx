@@ -5,7 +5,11 @@ import { useAuth } from "../../context/auth";
 import moment from "moment";
 import AdminMenu from "./../../Layout/AdminMenu";
 import { Select, Spin, Empty, Badge, Card, message } from "antd";
-import { ShoppingOutlined, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {
+  ShoppingOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -25,7 +29,7 @@ function AdminOrders() {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        "http://localhost:8080/api/v1/auth/all-order",
+        "https://urnanknit-backend.onrender.com/api/v1/auth/all-order",
         {
           headers: {
             Authorization: auth?.token,
@@ -47,7 +51,7 @@ function AdminOrders() {
   const handleChange = async (orderId, val) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:8080/api/v1/auth/order-status/${orderId}`,
+        `https://urnanknit-backend.onrender.com/api/v1/auth/order-status/${orderId}`,
         {
           status: val,
         },
@@ -97,7 +101,9 @@ function AdminOrders() {
                 <h1 className="text-2xl font-bold text-gray-800">All Orders</h1>
                 <div className="flex items-center gap-2">
                   <ShoppingOutlined className="text-xl text-gray-600" />
-                  <span className="text-gray-600">Total Orders: {orders.length}</span>
+                  <span className="text-gray-600">
+                    Total Orders: {orders.length}
+                  </span>
                 </div>
               </div>
 
@@ -108,21 +114,29 @@ function AdminOrders() {
               ) : orders.length > 0 ? (
                 <div className="space-y-6">
                   {orders.map((order, index) => (
-                    <Card key={order._id} className="hover:shadow-lg transition-shadow">
+                    <Card
+                      key={order._id}
+                      className="hover:shadow-lg transition-shadow"
+                    >
                       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                         <div>
                           <h3 className="text-lg font-semibold text-gray-800">
                             Order #{index + 1}
                           </h3>
                           <p className="text-sm text-gray-500">
-                            Placed on {moment(order.createdAt).format("MMMM Do YYYY, h:mm a")}
+                            Placed on{" "}
+                            {moment(order.createdAt).format(
+                              "MMMM Do YYYY, h:mm a"
+                            )}
                           </p>
                         </div>
                         <div className="flex items-center gap-4">
                           <Badge
                             status={getStatusColor(order.status)}
                             text={
-                              <span className="font-medium capitalize">{order.status}</span>
+                              <span className="font-medium capitalize">
+                                {order.status}
+                              </span>
                             }
                           />
                           <Select
@@ -147,12 +161,14 @@ function AdminOrders() {
                             className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg"
                           >
                             <img
-                              src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+                              src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${product._id}`}
                               alt={product.name}
                               className="w-20 h-20 object-cover rounded-lg"
                             />
                             <div className="flex-1">
-                              <h4 className="font-medium text-gray-800">{product.name}</h4>
+                              <h4 className="font-medium text-gray-800">
+                                {product.name}
+                              </h4>
                               <p className="text-sm text-gray-600 line-clamp-2">
                                 {product.description}
                               </p>
@@ -178,13 +194,21 @@ function AdminOrders() {
                               <CloseCircleOutlined className="text-red-500 text-xl" />
                             )}
                             <span className="font-medium">
-                              Payment: {order.payment.success ? "Successful" : "Failed"}
+                              Payment:{" "}
+                              {order.payment.success ? "Successful" : "Failed"}
                             </span>
                           </div>
                           <div className="text-right">
                             <p className="text-sm text-gray-500">Order Total</p>
                             <p className="text-lg font-bold text-gray-900">
-                              ₹{order.products.reduce((total, p) => total + p.price * (p.quantity || 1), 0).toLocaleString("en-IN")}
+                              ₹
+                              {order.products
+                                .reduce(
+                                  (total, p) =>
+                                    total + p.price * (p.quantity || 1),
+                                  0
+                                )
+                                .toLocaleString("en-IN")}
                             </p>
                           </div>
                         </div>
@@ -193,10 +217,7 @@ function AdminOrders() {
                   ))}
                 </div>
               ) : (
-                <Empty
-                  description="No orders found"
-                  className="my-8"
-                />
+                <Empty description="No orders found" className="my-8" />
               )}
             </div>
           </div>
