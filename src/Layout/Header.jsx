@@ -24,16 +24,16 @@ function Header() {
     if (dropdownTimeout) {
       clearTimeout(dropdownTimeout);
     }
-    
+
     if (isOpen) {
-      if (type === 'category') {
+      if (type === "category") {
         setCategoryDropdownOpen(true);
       } else {
         setUserDropdownOpen(true);
       }
     } else {
       const timeout = setTimeout(() => {
-        if (type === 'category') {
+        if (type === "category") {
           setCategoryDropdownOpen(false);
         } else {
           setUserDropdownOpen(false);
@@ -81,9 +81,9 @@ function Header() {
         <NavLink
           to="/"
           className="text-2xl font-bold text-blue-600 dark:text-blue-400 tracking-tight hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200"
-          aria-label="Hospital Home"
+          aria-label="UrbanKnit Home"
         >
-          Hospital
+          UrbanKnit
         </NavLink>
 
         {/* Mobile Menu Button */}
@@ -108,8 +108,8 @@ function Header() {
           {/* Category Dropdown */}
           <div
             className="relative"
-            onMouseEnter={() => handleDropdownHover(true, 'category')}
-            onMouseLeave={() => handleDropdownHover(false, 'category')}
+            onMouseEnter={() => handleDropdownHover(true, "category")}
+            onMouseLeave={() => handleDropdownHover(false, "category")}
           >
             <button className="text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center">
               Category
@@ -169,8 +169,8 @@ function Header() {
           ) : (
             <div
               className="relative"
-              onMouseEnter={() => handleDropdownHover(true, 'user')}
-              onMouseLeave={() => handleDropdownHover(false, 'user')}
+              onMouseEnter={() => handleDropdownHover(true, "user")}
+              onMouseLeave={() => handleDropdownHover(false, "user")}
             >
               <button className="text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center">
                 {auth?.user?.name}
@@ -191,7 +191,9 @@ function Header() {
               {userDropdownOpen && (
                 <div className="absolute bg-white dark:bg-gray-700 rounded-lg shadow-lg mt-2 w-48 z-10">
                   <NavLink
-                    to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
+                    to={`/dashboard/${
+                      auth?.user?.role === 1 ? "admin" : "user"
+                    }`}
                     className="block px-4 py-2 text-gray-600 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-600 hover:text-blue-600 dark:hover:text-blue-400"
                   >
                     Dashboard

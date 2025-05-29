@@ -11,11 +11,11 @@ function About() {
             About Us
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
-            Welcome to <span className="font-semibold">Our Hospital</span>,
+            Welcome to <span className="font-semibold">Our UrbanKnit</span>,
             where our top priority is providing exceptional healthcare services
             to our Products. We are dedicated to the highest standards of
             medical care, ensuring that every Product receives compassionate,
-            personalized treatment. From the moment you enter our hospital, you
+            personalized treatment. From the moment you enter our UrbanKnit, you
             will experience a warm and caring environment, designed to provide
             the best possible outcomes for your health.
           </p>
@@ -24,7 +24,7 @@ function About() {
             Product-Centered Care
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            At <span className="font-semibold">Our Hospital</span>, we believe
+            At <span className="font-semibold">Our UrbanKnit</span>, we believe
             that every Product is unique and deserves customized care. We work
             closely with Products and their families to develop personalized
             treatment plans that address their specific health needs. Our
@@ -59,7 +59,7 @@ function About() {
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
             With a commitment to excellence,{" "}
-            <span className="font-semibold">Our Hospital</span> combines
+            <span className="font-semibold">Our UrbanKnit</span> combines
             cutting-edge technology with compassionate care. Our Product
             management system allows us to keep track of every Product’s
             details, conditions, and treatment history, ensuring that every

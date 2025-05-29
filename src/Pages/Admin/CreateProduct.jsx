@@ -172,7 +172,7 @@ function CreateProduct() {
               </div>
               <div>
                 <Select
-                  placeholder="Have you been in this Hospital before"
+                  placeholder="Have you been in this UrbanKnit before"
                   size="large"
                   className="w-full border rounded-lg"
                   onChange={(val) => setShipping(val)}

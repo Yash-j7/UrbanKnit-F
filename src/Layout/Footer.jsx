@@ -61,7 +61,7 @@ function Footer() {
           </div>
         </nav>
         <aside>
-          <p>Copyright © 2024 - All right reserved by Hospital</p>
+          <p>Copyright © 2024 - All right reserved by UrbanKnit</p>
         </aside>
       </footer>
     </div>
