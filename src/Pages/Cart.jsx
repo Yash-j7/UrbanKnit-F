@@ -248,97 +248,83 @@ function Cart() {
             {/* Cart Items Section */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="p-6 border-b border-gray-100">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    Cart Items
-                  </h2>
-                </div>
-                <div className="divide-y divide-gray-100">
-                  {cart.map((product, index) => (
-                    <div
-                      key={index}
-                      className="p-6 hover:bg-gray-50 transition-colors duration-200"
-                    >
-                      <div className="flex items-start space-x-4">
-                        {/* Product Image */}
-                        <div className="flex-shrink-0 group">
-                          <img
-                            alt={product.name}
-                            className="w-24 h-24 object-cover rounded-lg border border-gray-200 group-hover:scale-105 transition-transform duration-300"
-                            src={`https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${product._id}`}
-                          />
-                        </div>
+                {cart.map((item) => (
+                  <div
+                    key={item._id}
+                    className="flex items-center p-6 border-b border-gray-100 last:border-b-0"
+                  >
+                    {/* Product Image */}
+                    <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+                      <img
+                        src={item.type === 'resale' 
+                          ? item.image 
+                          : `https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${item._id}`}
+                        alt={item.name || item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-                        {/* Product Details */}
-                        <div className="flex-1 min-w-0">
-                          <h3
-                            className="text-lg font-medium text-gray-900 mb-1 hover:text-blue-600 transition-colors cursor-pointer"
-                            onClick={() => navigate(`/product/${product.slug}`)}
-                          >
-                            {product.name}
+                    {/* Product Details */}
+                    <div className="ml-6 flex-grow">
+                      <div className="flex justify-between">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            {item.name || item.title}
                           </h3>
-                          <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                            {product.description}
+                          <p className="text-sm text-gray-500 mt-1">
+                            {item.type === 'resale' ? 'Resale Item' : item.category}
                           </p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4">
-                              <span className="text-xl font-bold text-gray-900">
-                                ₹{product.price.toLocaleString("en-IN")}
-                              </span>
-                              <div className="flex items-center border rounded-lg bg-white">
-                                <button
-                                  className="px-3 py-1 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                  onClick={() =>
-                                    handleQuantityChange(
-                                      product._id,
-                                      (product.quantity || 1) - 1
-                                    )
-                                  }
-                                  disabled={(product.quantity || 1) <= 1}
-                                >
-                                  -
-                                </button>
-                                <span className="px-4 py-1 border-x text-center min-w-[40px] font-medium">
-                                  {product.quantity || 1}
-                                </span>
-                                <button
-                                  className="px-3 py-1 hover:bg-gray-50 transition-colors"
-                                  onClick={() =>
-                                    handleQuantityChange(
-                                      product._id,
-                                      (product.quantity || 1) + 1
-                                    )
-                                  }
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-                            <button
-                              className="inline-flex items-center px-3 py-2 border border-red-300 text-sm font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 hover:border-red-400 transition-all duration-200"
-                              onClick={() => handleCartItem(product._id)}
-                            >
-                              <svg
-                                className="w-4 h-4 mr-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                />
-                              </svg>
-                              Remove
-                            </button>
-                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleCartItem(item._id)}
+                          className="text-gray-400 hover:text-red-500 transition-colors"
+                        >
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+
+                      {/* Price and Quantity */}
+                      <div className="flex items-center justify-between mt-4">
+                        <div className="flex items-center">
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item._id, (item.quantity || 1) - 1)
+                            }
+                            className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:border-gray-400"
+                          >
+                            -
+                          </button>
+                          <span className="mx-4 w-8 text-center">
+                            {item.quantity || 1}
+                          </span>
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item._id, (item.quantity || 1) + 1)
+                            }
+                            className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:border-gray-400"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <div className="text-lg font-semibold text-gray-900">
+                          ₹{(item.price * (item.quantity || 1)).toLocaleString("en-IN")}
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
 

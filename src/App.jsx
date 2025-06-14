@@ -24,6 +24,11 @@ import Categories from "./Pages/Categories.jsx";
 import CategoryProduct from "./Pages/CategoryProduct.jsx";
 import Cart from "./Pages/Cart";
 import AdminOrders from "./Pages/Admin/AdminOrders.jsx";
+import FootballLoading from "./components/FootballLoading.jsx";
+import UploadResaleProduct from "./Pages/UploadResaleProduct.jsx";
+import ResaleListings from "./Pages/ResaleListings";
+import ResaleListingDetail from "./Pages/ResaleListingDetail";
+
 function App() {
   return (
     <div className="dark:bg-slate-900 dark:text-white">
@@ -40,6 +45,7 @@ function App() {
           <Route path="user" element={<Dashboard />} />
           <Route path="user/orders" element={<Orders />} />
           <Route path="user/profile" element={<Profle />} />
+          <Route path="resale/upload" element={<UploadResaleProduct />} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
@@ -62,6 +68,11 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
 
         <Route path="/login" element={<Login />} />
+        <Route path="/loading" element={<FootballLoading />} />
+
+        <Route path="/resale" element={<ResaleListings />} />
+        <Route path="/resale/:slug" element={<ResaleListingDetail />} />
+        <Route path="/upload-resale" element={<UploadResaleProduct />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

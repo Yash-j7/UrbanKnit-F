@@ -15,6 +15,7 @@ import {
 } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext";
+import FootballLoading from "../components/FootballLoading.jsx";
 
 const { Meta } = Card;
 
@@ -88,7 +89,7 @@ function DetailedProduct() {
     return (
       <Layout>
         <div className="flex justify-center items-center min-h-[400px]">
-          <Spin size="large" />
+          <FootballLoading />
         </div>
       </Layout>
     );

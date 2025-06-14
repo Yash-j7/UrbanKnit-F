@@ -10,6 +10,7 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
+import FootballLoading from "../../components/FootballLoading.jsx";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -80,9 +81,7 @@ function Orders() {
               </div>
 
               {loading ? (
-                <div className="flex justify-center items-center h-64">
-                  <Spin size="large" />
-                </div>
+                <FootballLoading />
               ) : orders.length > 0 ? (
                 <div className="space-y-6">
                   {orders.map((order, index) => (

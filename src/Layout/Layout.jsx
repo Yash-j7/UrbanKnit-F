@@ -5,14 +5,13 @@ import { Toaster } from "react-hot-toast";
 
 function Layout({ children }) {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="pt-24">
+      <main className="flex-grow pt-24">
         <Toaster />
         {children}
       </main>
       <Footer />
-      min-h-[70vh]
     </div>
   );
 }

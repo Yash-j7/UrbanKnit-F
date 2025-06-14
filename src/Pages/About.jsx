@@ -8,11 +8,11 @@ function About() {
       <div className="bg-gray-100 min-h-screen p-8">
         <div className="max-w-7xl mx-auto py-12 px-6 sm:px-8 lg:px-10 bg-white shadow-lg rounded-lg">
           <h1 className="text-4xl font-bold text-center text-blue-600 mb-8">
-            About UrbanKnit
+            About ProPitch
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
-            Welcome to <span className="font-semibold">UrbanKnit</span> – your
+            Welcome to <span className="font-semibold">ProPitch</span> – your
             one-stop destination for trendy, high-quality fashion that fits your
             lifestyle. We are passionate about bringing you modern, affordable,
             and comfortable clothing designed with you in mind.
@@ -22,7 +22,7 @@ function About() {
             Customer-Centric Fashion
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            At <span className="font-semibold">UrbanKnit</span>, every customer
+            At <span className="font-semibold">ProPitch</span>, every customer
             is at the heart of what we do. Our collections are curated to
             reflect the latest trends while keeping comfort and quality as our
             top priorities. Whether you're shopping for daily wear, office
@@ -44,7 +44,7 @@ function About() {
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Our mission is simple: to make fashion accessible, exciting, and
             empowering. We believe everyone deserves to feel confident in what
-            they wear. With UrbanKnit, you don’t just wear clothes — you express
+            they wear. With ProPitch, you don’t just wear clothes — you express
             yourself.
           </p>
 
@@ -52,7 +52,7 @@ function About() {
             Why Shop With Us?
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
-            UrbanKnit is more than just an online store — it's a community of
+            ProPitch is more than just an online store — it's a community of
             style-savvy individuals who care about quality and affordability. We
             use sustainable practices where possible and aim to reduce our
             environmental footprint, all while delivering fresh looks to your
