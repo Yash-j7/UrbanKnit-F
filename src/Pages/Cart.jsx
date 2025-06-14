@@ -274,7 +274,9 @@ function Cart() {
                           <p className="text-sm text-gray-500 mt-1">
                             {item.type === "resale"
                               ? "Resale Item"
-                              : item.category}
+                              : typeof item.category === 'object' 
+                                ? item.category.name 
+                                : item.category}
                           </p>
                         </div>
                         <button
