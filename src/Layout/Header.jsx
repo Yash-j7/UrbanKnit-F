@@ -103,7 +103,9 @@ function Header() {
               to="/"
               className={({ isActive }) =>
                 `text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 ${
-                  isActive ? "text-blue-600 dark:text-blue-400 font-semibold" : ""
+                  isActive
+                    ? "text-blue-600 dark:text-blue-400 font-semibold"
+                    : ""
                 }`
               }
             >
@@ -162,7 +164,9 @@ function Header() {
                   to="/register"
                   className={({ isActive }) =>
                     `text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 ${
-                      isActive ? "text-blue-600 dark:text-blue-400 font-semibold" : ""
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400 font-semibold"
+                        : ""
                     }`
                   }
                 >
@@ -172,7 +176,9 @@ function Header() {
                   to="/login"
                   className={({ isActive }) =>
                     `text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 ${
-                      isActive ? "text-blue-600 dark:text-blue-400 font-semibold" : ""
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400 font-semibold"
+                        : ""
                     }`
                   }
                 >
@@ -206,7 +212,9 @@ function Header() {
                 {userDropdownOpen && (
                   <div className="absolute bg-white dark:bg-gray-700 rounded-lg shadow-lg mt-2 w-48 py-2 z-10 transform transition-all duration-200 ease-in-out">
                     <NavLink
-                      to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
+                      to={`/dashboard/${
+                        auth?.user?.role === 1 ? "admin" : "user"
+                      }`}
                       className="block px-4 py-2 text-gray-600 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
                     >
                       Dashboard
@@ -341,7 +349,7 @@ function Header() {
             >
               Home
             </NavLink>
-            
+
             <div className="space-y-2">
               <button
                 className="w-full text-left py-2 text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -351,7 +359,9 @@ function Header() {
               </button>
               <div
                 className={`pl-4 space-y-2 transform transition-all duration-200 ${
-                  categoryDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  categoryDropdownOpen
+                    ? "max-h-96 opacity-100"
+                    : "max-h-0 opacity-0"
                 } overflow-hidden`}
               >
                 <Link

@@ -9,8 +9,10 @@ const isValidCartItem = (item) => {
     typeof item === 'object' &&
     item._id &&
     typeof item.price === 'number' &&
+    item.price > 0 &&
     typeof item.quantity === 'number' &&
-    item.quantity > 0
+    item.quantity > 0 &&
+    (item.name || item.title) // Ensure item has a name or title
   );
 };
 
@@ -36,6 +38,10 @@ const CartProvider = ({ children }) => {
           setCart([]);
           localStorage.removeItem("cart");
         }
+      } else {
+        // If no cart in localStorage, ensure empty cart
+        setCart([]);
+        localStorage.removeItem("cart");
       }
     } catch (error) {
       console.error("Error loading cart from localStorage:", error);

@@ -254,9 +254,11 @@ function Cart() {
                     {/* Product Image */}
                     <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
                       <img
-                        src={item.type === 'resale' 
-                          ? item.image 
-                          : `https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${item._id}`}
+                        src={
+                          item.type === "resale"
+                            ? item.image
+                            : `https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${item._id}`
+                        }
                         alt={item.name || item.title}
                         className="w-full h-full object-cover"
                       />
@@ -270,7 +272,9 @@ function Cart() {
                             {item.name || item.title}
                           </h3>
                           <p className="text-sm text-gray-500 mt-1">
-                            {item.type === 'resale' ? 'Resale Item' : item.category}
+                            {item.type === "resale"
+                              ? "Resale Item"
+                              : item.category}
                           </p>
                         </div>
                         <button
@@ -298,7 +302,10 @@ function Cart() {
                         <div className="flex items-center">
                           <button
                             onClick={() =>
-                              handleQuantityChange(item._id, (item.quantity || 1) - 1)
+                              handleQuantityChange(
+                                item._id,
+                                (item.quantity || 1) - 1
+                              )
                             }
                             className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:border-gray-400"
                           >
@@ -309,7 +316,10 @@ function Cart() {
                           </span>
                           <button
                             onClick={() =>
-                              handleQuantityChange(item._id, (item.quantity || 1) + 1)
+                              handleQuantityChange(
+                                item._id,
+                                (item.quantity || 1) + 1
+                              )
                             }
                             className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:border-gray-400"
                           >
@@ -317,7 +327,10 @@ function Cart() {
                           </button>
                         </div>
                         <div className="text-lg font-semibold text-gray-900">
-                          ₹{(item.price * (item.quantity || 1)).toLocaleString("en-IN")}
+                          ₹
+                          {(item.price * (item.quantity || 1)).toLocaleString(
+                            "en-IN"
+                          )}
                         </div>
                       </div>
                     </div>
