@@ -9,7 +9,7 @@ import axios from "axios";
 
 function Cart() {
   const [auth] = useAuth();
-  const [cart, setCart] = useCart();
+  const [cart, updateCart] = useCart();
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,8 +20,7 @@ function Cart() {
       const myCart = [...cart];
       let idx = myCart.findIndex((item) => item._id === pid);
       myCart.splice(idx, 1);
-      setCart(myCart);
-      localStorage.setItem("cart", JSON.stringify(myCart));
+      updateCart(myCart);
       toast.success("Product removed successfully");
     } catch (error) {
       console.log(error);
@@ -35,8 +34,7 @@ function Cart() {
       item._id === productId ? { ...item, quantity: newQuantity } : item
     );
 
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateCart(updatedCart);
   };
 
   const getToken = async () => {
@@ -118,7 +116,7 @@ function Cart() {
             if (verifyData.success) {
               toast.success("Payment Successful!");
               localStorage.removeItem("cart");
-              setCart([]);
+              updateCart([]);
               navigate("/dashboard/user/orders");
             } else {
               toast.error(verifyData.message || "Payment verification failed");
@@ -172,7 +170,7 @@ function Cart() {
   //     );
   //     setLoading(false);
   //     localStorage.removeItem("cart");
-  //     setCart([]);
+  //     updateCart([]);
   //     navigate("/dashboard/user/orders");
   //     toast.success("Payment Completed Successfully");
   //   } catch (error) {

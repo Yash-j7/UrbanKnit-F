@@ -5,12 +5,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import Card from "antd/es/card/Card";
 import Meta from "antd/es/card/Meta";
 import { Button } from "antd";
+import { toast } from "react-hot-toast";
+import { useCart } from "../context/CartContext";
 
 function CategoryProduct() {
   const params = useParams();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
+  const [cart, updateCart] = useCart();
+
   useEffect(() => {
     if (params?.slug) getCateProd();
   }, [params?.slug]);
@@ -24,6 +28,29 @@ function CategoryProduct() {
       setCategory(data?.category);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleAddToCart = (product) => {
+    try {
+      // Ensure all required fields are present and properly formatted
+      const cartItem = {
+        _id: product._id,
+        name: product.name,
+        price: Number(product.price),
+        quantity: 1,
+        type: 'product',
+        image: `https://urnanknit-backend.onrender.com/api/v1/product/product-photo/${product._id}`,
+        slug: product.slug,
+        description: product.description
+      };
+
+      const updatedCart = [...cart, cartItem];
+      updateCart(updatedCart);
+      toast.success("Item Added to cart");
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart");
     }
   };
 
@@ -50,7 +77,7 @@ function CategoryProduct() {
             >
               <Meta title={p.name} description={p.description} />
               <div className="card-name-price mt-3">
-                <h5 className="card-title">{p.price} years old</h5>
+                <h5 className="card-title">₹{p.price.toLocaleString("en-IN")}</h5>
               </div>
               <div className="mt-3 flex">
                 <Button
@@ -62,13 +89,9 @@ function CategoryProduct() {
                 <Button
                   type="default"
                   className="ml-2"
-                  onClick={() => {
-                    setCart([...cart, p]);
-                    localStorage.setItem("cart", JSON.stringify([...cart, p]));
-                    toast.success("Item Added to cart");
-                  }}
+                  onClick={() => handleAddToCart(p)}
                 >
-                  Add to Criticals
+                  Add to Cart
                 </Button>
               </div>
             </Card>
