@@ -22,16 +22,23 @@ function Register() {
       //const apiUrl = process.env.VITE_API_URL; ${apiUrl}
 
       const res = await axios.post(
-        "https://urnanknit-backend.onrender.com/api/v1/auth/register",
-        {
-          name,
-          email,
-          password,
-          phone,
-          address,
-          answer,
-        }
-      );
+  "https://urnanknit-backend.onrender.com/api/v1/auth/register",
+  {
+    name,
+    email,
+    password,
+    phone,
+    address,
+    answer,
+  },
+  {
+    withCredentials: true, // Include cookies if necessary
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+);
+
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
         navigate("/login");
